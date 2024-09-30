@@ -5,6 +5,8 @@ import machine_snacks_files.domain.Snack;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +40,25 @@ public class ServicesSnacksFiles implements ISnacksServices {
         this.addSnacks(new Snack("Festival", 12.22));
         this.addSnacks(new Snack("Chocolatina jets", 25.22));
     }
+    private List<Snack> getMeSnacks(){
+        var snacks = new ArrayList<Snack>();
+        try {
+           List<String> lines = Files.readAllLines(Paths.get(NAME_FILE));
+           for (String line : lines){
+              String[] lineSnack =  line.split(",");
+              var idSnack = lineSnack[0];
+              var name = lineSnack[1];
+              var price = Double.parseDouble(lineSnack[2]);
+              var snack = new Snack(name , price);
+              snacks.add(snack);
+           }
+        }catch (Exception e){
+            System.out.println("Reading Error .... " + e.getMessage());
+            e.printStackTrace();
+        }
+        return snacks;
+    }
+
     @Override
     public void addSnacks(Snack snack) {
         //Add new snack
@@ -54,7 +75,7 @@ public class ServicesSnacksFiles implements ISnacksServices {
         try{
             anexo = file.exists();
             var exit = new PrintWriter(new FileWriter(file , anexo));
-            exit.println(snack.toString());
+            exit.println(snack.writeSnack());
             exit.close();
 
         }catch (Exception e){
@@ -62,14 +83,18 @@ public class ServicesSnacksFiles implements ISnacksServices {
         }
     }
 
-
     @Override
     public void showSnacks() {
-
+        System.out.println("--- Available snacks---");
+        var inventory = "";
+        for(var snack : this.snacks){
+            inventory += snack.toString() + "\n";
+        }
+        System.out.println(inventory);
     }
 
     @Override
     public List<Snack> getSnacks() {
-        return List.of();
+        return this.snacks;
     }
 }

@@ -48,7 +48,7 @@ public class Snack implements Serializable {
                 '}';
     }
     public String writeSnack(){
-        return id_snack + "," + nombre + "," + precio;
+        return id_snack + "," + nombre + ", " + precio ;
     }
 
     @Override

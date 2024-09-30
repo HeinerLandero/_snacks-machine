@@ -45,7 +45,8 @@ public class MaquinaSnacks {
                 1. Comprar Snack
                 2. Mostrar ticket
                 3. Agregar nuevo snack
-                4. Salir
+                4. Inventario de Snacks
+                5. Salir
                 Elije una opcion ... \s""");
         //Leemos las opciones y retornamos la opcion seleccionada
         return  Integer.parseInt(consola.nextLine());
@@ -56,7 +57,8 @@ public class MaquinaSnacks {
             case  1 -> comprarSnack(consola , productos , serviceSnacks);
             case  2 -> mostrarTicket(productos);
             case  3 -> agregarSnack(consola , serviceSnacks);
-            case  4 -> {
+            case  4 -> productsInventory(consola , serviceSnacks);
+            case  5 -> {
               printer("Gracias por usar nuestro servicio, vuelve pronto");
               salir = true;
             }
@@ -83,6 +85,9 @@ public class MaquinaSnacks {
         if (!snackEncontrado){
             printer("Id de Snack no encontrado " + idSnack);
         }
+    }
+    public static void productsInventory(Scanner consola, ISnacksServices serviceSnacks){
+        serviceSnacks.showSnacks();
     }
     public static void mostrarTicket(List<Snack> productos){
         var ticket = "*** Ticket de venta ***";
