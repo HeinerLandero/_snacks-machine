@@ -47,6 +47,9 @@ public class Snack implements Serializable {
                 ", precio=" + precio +
                 '}';
     }
+    public String writeSnack(){
+        return id_snack + "," + nombre + "," + precio;
+    }
 
     @Override
     public boolean equals(Object o) {

@@ -3,6 +3,7 @@ package machine_snacks_files.presentation;
 import machine_snacks_files.domain.Snack;
 import machine_snacks_files.services.ISnacksServices;
 import machine_snacks_files.services.ListSnacksServices;
+import machine_snacks_files.services.ServicesSnacksFiles;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +22,9 @@ public class MaquinaSnacks {
         var salir = false;
         var consola = new Scanner(System.in);
         //Created object for snacks services
-        ISnacksServices serviceSnacks = new ListSnacksServices();
+        //ISnacksServices serviceSnacks = new ListSnacksServices();
+        ISnacksServices serviceSnacks = new ServicesSnacksFiles();
+
         List<Snack> productos = new ArrayList<>();
         printer("*** Snacks's Machine ***");
         serviceSnacks.showSnacks();// Displayed the inventory

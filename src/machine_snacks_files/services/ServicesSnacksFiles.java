@@ -19,7 +19,7 @@ public class ServicesSnacksFiles implements ISnacksServices {
         try{
             exist = file.exists();
             if(exist){
-                this.snacks = getSnack();
+//                this.snacks = getSnack();
             }else{
                 var exit = new PrintWriter(new FileWriter(file));
                 exit.close();
@@ -32,10 +32,36 @@ public class ServicesSnacksFiles implements ISnacksServices {
             loadedSnacks();
         }
     }
+    private void loadedSnacks(){
+        this.addSnacks(new Snack("Detodito", 125.22));
+        this.addSnacks(new Snack("Coca-cola", 15.22));
+        this.addSnacks(new Snack("Festival", 12.22));
+        this.addSnacks(new Snack("Chocolatina jets", 25.22));
+    }
     @Override
     public void addSnacks(Snack snack) {
+        //Add new snack
+        // 1. save it in memory list
+        this.snacks.add(snack);
+        // 2. save it in file
+        this.saveSnackFile(snack);
 
     }
+
+    private void saveSnackFile(Snack snack){
+        boolean anexo = false;
+        var file = new File(NAME_FILE);
+        try{
+            anexo = file.exists();
+            var exit = new PrintWriter(new FileWriter(file , anexo));
+            exit.println(snack.toString());
+            exit.close();
+
+        }catch (Exception e){
+            System.out.println("Problem !!!");
+        }
+    }
+
 
     @Override
     public void showSnacks() {

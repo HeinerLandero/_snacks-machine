@@ -1,0 +1,5 @@
+Snack{id_snack=1, nombre='Detodito', precio=125.22}
+Snack{id_snack=2, nombre='Coca-cola', precio=15.22}
+Snack{id_snack=3, nombre='Festival', precio=12.22}
+Snack{id_snack=4, nombre='Chocolatina jets', precio=25.22}
+Snack{id_snack=5, nombre='papitas', precio=120.0}
